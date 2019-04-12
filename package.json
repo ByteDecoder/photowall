@@ -14,6 +14,11 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
+    "settings": {
+			"react": {
+				"version": "999.999.999"
+			}
+		},
     "extends": "react-app"
   },
   "browserslist": [
@@ -21,5 +26,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "stylelint": "^9.10.1"
+  }
 }
