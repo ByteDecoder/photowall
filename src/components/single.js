@@ -11,7 +11,7 @@ class Single extends Component {
         const index = this.props.posts.findIndex(post => post.id === id);
         return <div className="single-photo">
                     <Photo {...this.props} post={post} index={index} /> 
-                    <Comments addComment={this.props.addComment} comments={comments} postId={id} />
+                    <Comments startAddingComment={this.props.startAddingComment} comments={comments} postId={id} />
                </div>
     }
 }

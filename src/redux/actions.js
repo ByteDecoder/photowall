@@ -32,6 +32,13 @@ export function startRemovingPost(index, id) {
     }
 }
 
+export function startAddingComment(comment, postId) {
+    return (dispatch) => {
+        return database.ref(`comments/${postId}`).push(comment)
+            .then(() => dispatch(addComment(comment, postId)))
+    }
+}
+
 // Redux Action
 export function removePost(index) {
     return {
