@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 
 class Photo extends Component {
-
-    removePhoto = () => this.props.onRemovePhoto(this.props.post);
+    removePhoto = () => this.props.removePost(this.props.index)
 
     render() {
         const post = this.props.post;
@@ -20,7 +19,7 @@ class Photo extends Component {
 
 Photo.propTypes = {
     post: PropTypes.object.isRequired,
-    onRemovePhoto: PropTypes.func.isRequired
+    index: PropTypes.number.isRequired
 }
 
 export default Photo;

@@ -1,26 +1,13 @@
 import React, {Component} from 'react';
-import Title from './title'
 import PhotoWall from './photowall'
 import AddPhoto from './add_photo'
 import {Route} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 class Main extends Component {
     constructor() {
         super();
         console.log('constructor');
-    }
-
-    removePhoto(postRemoved) {
-        console.log(postRemoved.description);
-        this.setState(state => ({
-            posts: state.posts.filter(post => post !== postRemoved)
-        }));
-    }
-
-    addPhoto(postSubmitted) {
-        this.setState(state => ({
-            posts: state.posts.concat(postSubmitted)
-        }));
     }
 
     componentDidMount() {
@@ -38,22 +25,19 @@ class Main extends Component {
     }
 
     render() {
-        console.log(this.props.posts);
-        console.log('render');
         return <div>
+                    <h1>
+                        <Link to="/"> Photowall </Link>
+                    </h1>
                     <Route exact path="/" render={() => (
                     <div>
-                        <Title taskTitle={'Photowall'}/>
-                        {/* <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} /> */}
+                        <PhotoWall {...this.props} />
                     </div>
                     )} />
-
-                    {/* <Route path="/add-photo" render={({history}) => (
-                        <AddPhoto onAddPhoto={(addedPost) => {
-                          this.addPhoto(addedPost);  
-                          history.push('/');
-                        }} />
-                    )} /> */}
+ 
+                    <Route path="/add-photo" render={({history}) => (
+                        <AddPhoto {...this.props} onHistory={history} />
+                    )} /> 
                </div>
     }
 }
