@@ -39,6 +39,20 @@ export function startAddingComment(comment, postId) {
     }
 }
 
+
+export function startLoadingComments() {
+    return (disptach) => {
+        return database.ref('comments').once('value')
+            .then(snapshot => {
+                let comments = {};
+                snapshot.forEach(childSnapshot => {
+                    comments[childSnapshot.key] = Object.values(childSnapshot.val());
+                })
+                disptach(loadComments(comments));
+        })
+    }
+}
+
 // Redux Action
 export function removePost(index) {
     return {
@@ -66,5 +80,12 @@ export function loadPost(posts) {
     return {
         type: 'load-posts',
         posts
+    }
+}
+
+export function loadComments(comments) {
+    return {
+        type: 'load-comments',
+        comments
     }
 }
