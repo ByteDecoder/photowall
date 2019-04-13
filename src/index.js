@@ -6,7 +6,6 @@ import rootReducer from './redux/reducer'
 import {Provider} from 'react-redux'
 import App from './components/app'
 import thunk from 'redux-thunk'
-import {database} from './database/config'
 import './styles/stylesheet.css'
 
 const store = createStore(

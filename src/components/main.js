@@ -5,23 +5,26 @@ import {Route, Link} from 'react-router-dom'
 import Single from './single'
 
 class Main extends Component {
+
+    state = { loading: true }
+
     constructor() {
         super();
-        console.log('constructor');
+        console.log('main.js - constructor');
     }
 
     componentDidMount() {
-        this.props.startLoadingPosts();
+        this.props.startLoadingPosts().then(() => this.setState({loading: false}));
         this.props.startLoadingComments();
-        console.log('componentDidMount');
+        console.log('main.js - componentDidMount');
     }
 
     componentWillMount() {
-        console.log('componentWillMount');
+        console.log('main.js - componentWillMount');
     }
 
     componentDidUpdate(prevProps, prevState) {
-        console.log('componentDidUpdate');
+        console.log('main.js - componentDidUpdate');
     }
 
     render() {
@@ -40,7 +43,7 @@ class Main extends Component {
                     )} /> 
 
                     <Route path="/single/:id" render={(params) => (
-                        <Single {...this.props} {...params} />
+                        <Single {...this.props} {...params} loading={this.state.loading} />
                     )} />
                </div>
     }
