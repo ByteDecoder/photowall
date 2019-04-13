@@ -17,6 +17,12 @@ class Photo extends Component {
                     <figcaption><p>{post.description}</p></figcaption>
                     <div className="button-container">
                         <button onClick={this.removePhoto}>Remove</button>
+                        <Link className="button" to={`/single/${post.id}`}>
+                            <div className="comment-count">
+                                <div className="speech-bubble"></div>
+                                { this.props.comments[post.id] ? this.props.comments[post.id].length : 0 }                            
+                            </div>
+                        </Link>
                     </div>
                </figure>
     }

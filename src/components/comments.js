@@ -10,6 +10,7 @@ class Comments extends Component {
         e.preventDefault();
         const comment = e.target.elements.comment.value;
         this.props.addComment(comment, this.props.postId);
+        e.target.elements.comment.value = '';
     }
 
     render() {
