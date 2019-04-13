@@ -15,6 +15,8 @@ function comments(currentState = {}, action) {
 
 function posts(currentState = _posts, action) {
      switch(action.type) {
+        case 'load-posts':
+            return action.posts;
         case 'remove-post': 
             return [...currentState.slice(0, action.index), ...currentState.slice(action.index +1)]
         case 'add-post': 

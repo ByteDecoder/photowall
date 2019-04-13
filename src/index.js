@@ -1,14 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware, compose} from 'redux'
 import rootReducer from './redux/reducer'
 import {Provider} from 'react-redux'
 import App from './components/app'
+import thunk from 'redux-thunk'
+import {database} from './database/config'
 import './styles/stylesheet.css'
 
-const store = createStore(rootReducer,
-     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const store = createStore(
+     rootReducer, 
+     compose(
+          applyMiddleware(thunk),
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()    
+     )
 );
             
 const mainEntryPoint = <Provider store={store}>
