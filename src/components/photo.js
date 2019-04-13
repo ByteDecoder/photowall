@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 class Photo extends Component {
     removePhoto = () => {
-        this.props.removePost(this.props.index);
+        this.props.startRemovingPost(this.props.index, this.props.post.id);
         this.props.history.push('/');
     }
 
@@ -26,7 +26,6 @@ class Photo extends Component {
                     </div>
                </figure>
     }
-
 }
 
 Photo.propTypes = {

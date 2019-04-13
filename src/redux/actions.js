@@ -25,6 +25,13 @@ export function startLoadingPosts() {
     }
 }
 
+export function startRemovingPost(index, id) {
+    return (dispatch) => {
+        return database.ref(`posts/${id}`).remove()
+            .then(() => dispatch(removePost(index)))
+    }
+}
+
 // Redux Action
 export function removePost(index) {
     return {
