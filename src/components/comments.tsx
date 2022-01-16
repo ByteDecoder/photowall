@@ -2,16 +2,18 @@ import React from "react";
 
 interface Props {
   postId: number;
-  comments: Comment[];
-  startAddingComment: (comment: Comment, postId: number) => void;
+  comments: string[];
+  startAddingComment: (comment: string, postId: number) => void;
 }
 
 const Comments = ({ postId, comments, startAddingComment }: Props) => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const comment = e.target.elements.comment.value;
-    startAddingComment(comment, postId);
-    e.target.elements.comment.value = "";
+    const target = e.target as typeof e.target & {
+      comment: { value: string };
+    };
+    startAddingComment(target.comment.value, postId);
+    target.comment.value = "";
   };
 
   return (

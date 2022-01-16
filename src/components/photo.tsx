@@ -5,7 +5,7 @@ import Post from "../Models/post";
 interface Props {
   index: number;
   post: Post;
-  comments: Array<Comment>[];
+  comments: string[];
   startRemovingPost: (index: number, id: number) => void;
 }
 
