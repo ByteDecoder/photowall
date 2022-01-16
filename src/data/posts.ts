@@ -1,3 +1,5 @@
-const posts = [];
+import Post from "../Models/post";
 
-export default posts
+const posts: Post[] = [];
+
+export default posts;
