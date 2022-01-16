@@ -1,17 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Post from "../Models/post";
 
 interface Props {
   index: number;
   post: Post;
   comments: Array<Comment>[];
+  startRemovingPost: (index: number, id: number) => void;
 }
 
-const Photo = ({ index, post, comments }: Props) => {
+const Photo = ({ index, post, comments, startRemovingPost }: Props) => {
+  const navigate = useNavigate();
+
   const removePhoto = () => {
-    this.props.startRemovingPost(index, post.id);
-    this.props.history.push("/");
+    startRemovingPost(index, post.id);
+    navigate("/");
   };
 
   return (
