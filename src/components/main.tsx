@@ -1,17 +1,13 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import PhotoWall from "./photowall";
 import AddPhoto from "./add_photo";
 import { Route, Link } from "react-router-dom";
 import Single from "./single";
 
-class Main extends Component {
-  state = { loading: true };
+const Main = () => {
+  const [loading, setLoading] = useState(true);
 
-  constructor() {
-    super();
-    console.log("main.js - constructor");
-  }
-
+  
   componentDidMount() {
     this.props
       .startLoadingPosts()
@@ -20,15 +16,6 @@ class Main extends Component {
     console.log("main.js - componentDidMount");
   }
 
-  componentWillMount() {
-    console.log("main.js - componentWillMount");
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    console.log("main.js - componentDidUpdate");
-  }
-
-  render() {
     return (
       <div>
         <h1>
@@ -59,7 +46,6 @@ class Main extends Component {
         />
       </div>
     );
-  }
 }
 
 export default Main;
