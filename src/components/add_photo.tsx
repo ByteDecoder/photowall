@@ -1,43 +1,48 @@
-import React, { Component } from "react";
+import { useNavigate } from "react-router-dom";
+import Post from "../Models/post";
 
-class AddPhoto extends Component {
-  constructor() {
-    super();
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+interface Props {
+  startAddingPost: (post: Post) => void;
+}
 
-  handleSubmit(e) {
+const AddPhoto = ({ startAddingPost }: Props) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
-    const imageLink = e.target.elements.link.value;
-    const description = e.target.elements.description.value;
+    const target = e.target as typeof e.target & {
+      link: { value: string };
+      description: { value: string };
+    };
+    const imageLink = target.link.value;
+    const description = target.description.value;
     const post = {
       id: Number(new Date()),
       description: description,
       imageLink: imageLink,
-    };
-    if (description && imageLink) {
-      this.props.startAddingPost(post);
-      this.props.onHistory.push("/");
-    }
-  }
+    } as Post;
 
-  render() {
-    return (
-      <div>
-        <div className="form">
-          <form onSubmit={this.handleSubmit}>
-            <input type="text" placeholder="Photo Link" name="link" />
-            <input
-              type="text"
-              placeholder="Photo Description"
-              name="description"
-            />
-            <button>Post</button>
-          </form>
-        </div>
+    if (description && imageLink) {
+      startAddingPost(post);
+      navigate("/");
+    }
+  };
+
+  return (
+    <div>
+      <div className="form">
+        <form onSubmit={handleSubmit}>
+          <input type="text" placeholder="Photo Link" name="link" />
+          <input
+            type="text"
+            placeholder="Photo Description"
+            name="description"
+          />
+          <button>Post</button>
+        </form>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default AddPhoto;

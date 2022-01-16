@@ -1,10 +1,9 @@
-import React from "react";
 import Photo from "./photo";
 import { Link } from "react-router-dom";
 import Post from "../Models/post";
 
 interface Props {
-  posts: Array<Post>[];
+  posts: Post[];
 }
 
 const PhotoWall = ({ posts }: Props) => (
