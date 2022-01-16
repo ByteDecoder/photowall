@@ -6,7 +6,7 @@ import Post from "../Models/post";
 interface Props {
   loading: boolean;
   posts: Post[];
-  comments: string[][];
+  comments: Array<string[]>;
   startRemovingPost: (index: number, id: number) => void;
   startAddingComment: (comment: string, postId: number) => void;
 }
