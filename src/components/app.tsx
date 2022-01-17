@@ -5,14 +5,14 @@ import { bindActionCreators } from "redux";
 import * as actions from "../redux/actions";
 import { withRouter } from "react-router";
 
-function mapStateToProps(currentState) {
+function mapStateToProps(currentState: any) {
   return {
     posts: currentState.posts,
     comments: currentState.comments,
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: any) {
   return bindActionCreators(actions, dispatch);
 }
 

@@ -1,51 +1,81 @@
-import React, { Component, useState } from "react";
+import { useEffect, useState } from "react";
 import PhotoWall from "./photowall";
 import AddPhoto from "./add_photo";
-import { Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Single from "./single";
+import Post from "../Models/post";
 
-const Main = () => {
+interface Props {
+  startLoadingPosts: () => Promise<void>;
+  startLoadingComments: () => void;
+}
+
+const Main = ({ startLoadingPosts, startLoadingComments }: Props) => {
   const [loading, setLoading] = useState(true);
 
-  
-  componentDidMount() {
-    this.props
-      .startLoadingPosts()
-      .then(() => this.setState({ loading: false }));
-    this.props.startLoadingComments();
-    console.log("main.js - componentDidMount");
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      await startLoadingPosts();
+      setLoading(false);
+      startLoadingComments();
+    };
 
-    return (
-      <div>
-        <h1>
-          <Link to="/"> Photowall </Link>
-        </h1>
+    fetchData();
+  }, []);
+
+  return (
+    <div>
+      <h1>
+        <Link to="/"> Photowall </Link>
+      </h1>
+      <Router>
         <Route
-          exact
-          path="/"
-          render={() => (
-            <div>
-              <PhotoWall {...this.props} />
-            </div>
-          )}
+          path="/single/:id"
+          element={
+            <Single
+              loading={loading}
+              posts={[]}
+              comments={[]}
+              startRemovingPost={function (index: number, id: number): void {
+                throw new Error("Function not implemented.");
+              }}
+              startAddingComment={function (
+                comment: string,
+                postId: number
+              ): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          }
         />
 
         <Route
           path="/add-photo"
-          render={({ history }) => (
-            <AddPhoto {...this.props} onHistory={history} />
-          )}
+          element={
+            <AddPhoto
+              startAddingPost={function (post: Post): void {
+                throw new Error("Function not implemented.");
+              }}
+            />
+          }
         />
-
         <Route
-          path="/single/:id"
-          render={(params) => (
-            <Single {...this.props} {...params} loading={this.state.loading} />
+          path="/"
+          element={() => (
+            <div>
+              <PhotoWall
+                posts={[]}
+                comments={[]}
+                startRemovingPost={function (index: number, id: number): void {
+                  throw new Error("Function not implemented.");
+                }}
+              />
+            </div>
           )}
         />
-      </div>
-    );
-}
+      </Router>
+    </div>
+  );
+};
 
 export default Main;
